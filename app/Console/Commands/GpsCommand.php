@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Command;
 use Sunra\PhpSimple\HtmlDomParser;
+use Illuminate\Support\Facades\DB;
 
 class GpsCommand extends Command {
 
@@ -27,34 +28,37 @@ class GpsCommand extends Command {
     public function fire()
     {
         
-        $results = app('db')->select("SELECT cp4, cp3 FROM ctt LIMIT 100");
-        
-        foreach($results as $result) {
-            
-            echo($result->cp4.'-'.$result->cp3."\n");
-        }
-        
-        
-        return;
-        
+        $results = app('db')->select("SELECT DISTINCT cp4, cp3 FROM ctt where district_id = 8 AND latitude IS NOT NULL ORDER BY cp3;");
+                
         $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', 'https://');
-        $body = (string)$res->getBody();
-
-        $dom = HtmlDomParser::str_get_html($body);
+        foreach($results as $result) {
+            $res = $client->request('GET', 'https:ÂÂ//');
+            $body = (string)$res->getBody();
+            $dom = HtmlDomParser::str_get_html($body);
+            $gps = $dom->find('span[class="pull-right gps"]',0)->innertext;
+            if($gps) {
+                
+                $gps = trim(str_replace('<b>GPS:</b>','',$gps));
+                $parts = explode(',',$gps);
+                if(!is_array($parts) || count($parts) != 2){
+                    continue;
+                }
+                list($lat, $long) = $parts; 
+                $lat = floatval($lat);
+                $long = floatval($long);
+                DB::table('ctt')->where([
+                    ['cp4', '=', $result->cp4],
+                    ['cp3', '=', $result->cp3],
+                        ])->update(['latitude' => $lat,'longitude' => $long]);
+                echo($result->cp4.'-'.$result->cp3.' -> '.$lat.'/'.$long."\n");        
+                
+            } else {
+                echo($result->cp4.'-'.$result->cp3." -> \n");
+            }
         
-
-        $gps = $dom->find('span[class="pull-right gps"]',0)->innertext;
-        if($gps) {
-            
-            $gps = trim(str_replace('<b>GPS:</b>','',$gps));
-            
-            list($lat, $long) = explode(',',$gps);
-            
+            sleep(1);
             
         }
-        
-        echo($lat.'/'.$long);
     }
 
 }
