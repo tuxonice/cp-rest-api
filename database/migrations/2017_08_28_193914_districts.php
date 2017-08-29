@@ -17,7 +17,7 @@ class Districts extends Migration
             $table->engine = 'InnoDB';
             $table->integer('district_id')->unsigned(); 
             $table->string('name',64);
-            $table->unique('district_id');
+            $table->primary('district_id');
             
         });
     }

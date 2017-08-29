@@ -17,10 +17,10 @@ class CttSeeder extends Seeder
         $line = 0;
         $sData = [];
         $inserted = [];
+        $start = time();
         if (($handle = fopen($cpFile, "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
                 $line++;
-                $sData['name'] = $data[3];
                 $sData['district_id'] = (int)$data[0];
                 $sData['municipality_id'] = (int)$data[1];
                 $sData['location_id'] = (int)$data[2];
@@ -52,10 +52,11 @@ class CttSeeder extends Seeder
                 }
                 
                 if(!($line % 50)) {
-                    echo("Line: $line\n");
+                    $regPerSec = ceil($line / (time() - $start));
+                    echo("Line: $line -> $regPerSec Lines per sec\n");
                 }
                 
-                if($line > 1000) break;
+                if($line > 10000) break;
             }   
         fclose($handle);
         }

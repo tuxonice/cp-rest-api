@@ -20,6 +20,8 @@ class Locations extends Migration
             $table->integer('district_id')->unsigned();
             $table->string('name',64);
             $table->primary('location_id');
+            $table->index('municipality_id');
+            $table->index('district_id');
         });
     }
 
