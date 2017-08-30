@@ -17,10 +17,13 @@ class CttSeeder extends Seeder
         $line = 0;
         $sData = [];
         $inserted = [];
+        $cttBulkData = [];
+        $locationsBulkData = [];
         $start = time();
         if (($handle = fopen($cpFile, "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
                 $line++;
+
                 $sData['district_id'] = (int)$data[0];
                 $sData['municipality_id'] = (int)$data[1];
                 $sData['location_id'] = (int)$data[2];
@@ -37,27 +40,44 @@ class CttSeeder extends Seeder
                 $sData['cp4'] = $data[14];
                 $sData['cp3'] = $data[15];
                 $sData['cpalf'] = $data[16];
-                
-                DB::table('ctt')->insert($sData);        
-                
+
+                $bulkData[] = $sData;
                 if(!in_array((int)$data[2], $inserted)) {
-                    
                     $lData = [];
                     $lData['name'] = $data[3];
                     $lData['district_id'] = (int)$data[0];
                     $lData['municipality_id'] = (int)$data[1];
                     $lData['location_id'] = (int)$data[2];
-                    DB::table('locations')->insert($lData);
+                    $locationsBulkData[] = $lData;
                     $inserted[] = (int)$data[2];
                 }
-                
-                if(!($line % 50)) {
-                    $regPerSec = ceil($line / (time() - $start));
-                    echo("Line: $line -> $regPerSec Lines per sec\n");
+
+                if(count($bulkData) >= 400){
+                    DB::table('ctt')->insert($bulkData);
+                    DB::table('locations')->insert($locationsBulkData);
+                    $locationsBulkData = [];
+                    $bulkData = [];
                 }
-                
-                if($line > 10000) break;
-            }   
+
+                if(!($line % 100)) {
+                    $diffTime = (time() - $start);
+                    if($diffTime > 0){
+                        $regPerSec = ceil($line / $diffTime);
+                        echo("Line: $line -> $regPerSec Lines per sec\n");
+                    } else {
+                        echo("Line: $line\n");
+                    }
+                }
+            }
+            
+         if(count($bulkData)){
+            DB::table('ctt')->insert($bulkData); 
+         }
+         
+         if(count($locationsBulkData)){
+            DB::table('locations')->insert($locationsBulkData);
+         }           
+                    
         fclose($handle);
         }
     }
