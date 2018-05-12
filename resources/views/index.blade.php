@@ -25,7 +25,7 @@
       <div class="row">
           <div class="col-12-md">
             <h2>1. Usage</h2>
-            <p><code>http://<?php echo($_SERVER['HTTP_HOST']); ?>/api/v1/{cp1}/{cp2}</code></p>
+            <p><code>http://<?php echo($_SERVER['HTTP_HOST']); ?>/api/v1/{cp4}/{cp3}</code></p>
             <p>Example: <a href="http://<?php echo($_SERVER['HTTP_HOST']); ?>/api/v1/1990/231">http://<?php echo($_SERVER['HTTP_HOST']); ?>/api/v1/1990/231</a></p>
             <h2>2. Output</h2>
             <p><pre>
