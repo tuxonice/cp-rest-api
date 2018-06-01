@@ -24,10 +24,29 @@ class IndexController extends Controller
                 ['ctt.cp4', '=', $cp4],
                 ['ctt.cp3', '=', $cp3],
                  ])->get();
-          
-          
-        $data = $results;
-        return response()->json($data);
+
+        return response()->json($results);
+    }
+    
+    
+    public function Random()
+    {
+        $id = DB::table('ctt')
+                ->select('id')
+                ->inRandomOrder()
+                ->first();
+
+        $results = DB::table('ctt')
+            ->leftJoin('districts', 'ctt.district_id', '=', 'districts.district_id')
+            ->leftJoin('locations', 'ctt.location_id', '=', 'locations.location_id')
+            ->leftJoin('municipalities', function ($join) {
+                $join->on('ctt.municipality_id', '=', 'municipalities.municipality_id')->
+                on('municipalities.district_id', '=', 'ctt.district_id');
+                })
+            ->select('locations.name', 'districts.name AS district', 'municipalities.name AS municipality', 'ctt.*')
+            ->where('ctt.id', $id->id)->first();
+
+        return response()->json($results);
     }
     
 }
