@@ -11,12 +11,9 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return View('index');
-});
+$app->get('/', 'IndexController@Index');
 
-
-$app->group(['prefix' => 'api/v1', 'namespace' => 'ApiV1'], function () use ($app) {
+$app->group(['prefix' => 'api/v1', 'namespace' => 'ApiV1', 'middleware' => 'throttle:45,1'], function () use ($app) {
     $app->get('/{cp4}/{cp3}', 'IndexController@Index');
+    $app->get('/random', 'IndexController@Random');
 });
-

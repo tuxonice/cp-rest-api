@@ -25,8 +25,8 @@
       <div class="row">
           <div class="col-12-md">
             <h2>1. Usage</h2>
-            <p><code>http://<?php echo($_SERVER['HTTP_HOST']); ?>/api/v1/{cp4}/{cp3}</code></p>
-            <p>Example: <a href="http://<?php echo($_SERVER['HTTP_HOST']); ?>/api/v1/1990/231">http://<?php echo($_SERVER['HTTP_HOST']); ?>/api/v1/1990/231</a></p>
+            <p><code>{{$host}}/api/v1/{cp4}/{cp3}</code></p>
+            <p>Example: <a href="{{$host}}/api/v1/1990/231">{{$host}}/api/v1/1990/231</a></p>
             <h2>2. Output</h2>
             <p><pre>
 [
@@ -56,6 +56,13 @@
   }
 ]
 </pre></p>
+<h2>3. Random ZipCode</h2>
+<p>If you need data from a random zipcode:</p>
+<p><code>{{$host}}/api/v1/random</code></p>
+
+<h2>4. Limit rate</h2>
+<p>The API endpoint rate limit is 45 requests per minute</p>
+
 <h3>License</h3>
 <p>
 <small>THE SERVICE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
