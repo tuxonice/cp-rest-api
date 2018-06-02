@@ -15,6 +15,9 @@
         padding: 3rem 1.5rem;
         text-align: center;
     }
+    .label {
+        color:#145222
+    }
     </style>
   </head>
   <body>
@@ -31,26 +34,17 @@
             <p><pre>
 [
   {
-    "name": "Lisboa",
-    "district": "Lisboa",
-    "municipality": "Lisboa",
-    "id": 136883,
-    "location_id": 21696,
-    "municipality_id": 6,
-    "district_id": 11,
-    "art_cod": "300460611",
-    "art_tipo": "Rossio",
-    "pri_prep": "dos",
-    "art_titulo": "",
-    "seg_prep": "",
-    "art_desig": "Olivais",
-    "art_local": "",
-    "troco": "",
-    "porta": "",
-    "cliente": "",
+    "locationName": "Lisboa",
+    "fullAddress": "Rossio dos Olivais",
+    "zone": "",
+    "section": "",
+    "doorNumber": "",
+    "clientName": "",
     "cp4": "1990",
     "cp3": "231",
     "cpalf": "LISBOA",
+    "districtName": "Lisboa",
+    "municipalityName": "Lisboa",
     "latitude": null,
     "longitude": null
   }
