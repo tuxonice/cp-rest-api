@@ -34,48 +34,22 @@
             <p><pre>
 [
   {
-    "name": "Lisboa",
-    "district": "Lisboa",
-    "municipality": "Lisboa",
-    "id": 136883,
-    "location_id": 21696,
-    "municipality_id": 6,
-    "district_id": 11,
-    "art_cod": "300460611",
-    "art_tipo": "Rossio",
-    "pri_prep": "dos",
-    "art_titulo": "",
-    "seg_prep": "",
-    "art_desig": "Olivais",
-    "art_local": "",
-    "troco": "",
-    "porta": "",
-    "cliente": "",
+    "locationName": "Lisboa",
+    "fullAddress": "Rossio dos Olivais",
+    "zone": "",
+    "section": "",
+    "doorNumber": "",
+    "clientName": "",
     "cp4": "1990",
     "cp3": "231",
     "cpalf": "LISBOA",
+    "districtName": "Lisboa",
+    "municipalityName": "Lisboa",
     "latitude": null,
     "longitude": null
   }
 ]
 </pre></p>
-<h3>2.1 Labels (portuguese only)</h3>
-<p>
-    <b>name</b> <span class="label">Nome da localidade</span><br />
-    <b>art_cod</b> <span class="label">Código da Artéria</span><br />
-    <b>art_tipo</b> <span class="label">Artéria - Tipo (Rua, Praça, etc)</span><br />
-    <b>pri_prep</b> <span class="label">Primeira preposição</span><br />
-    <b>art_titulo</b> <span class="label">Artéria - Titulo (Doutor, Eng.º, Professor, etc)</span><br />
-    <b>seg_prep</b> <span class="label">Segunda preposição</span><br />
-    <b>art_desig</b> <span class="label">Artéria - Designação</span><br />
-    <b>art_local</b> <span class="label">Artéria - Informação do Local/Zona</span><br />
-    <b>troco</b> <span class="label">Descrição do troço</span><br />
-    <b>porta</b> <span class="label">Número da porta do cliente</span><br />
-    <b>cliente</b> <span class="label">Nome do cliente</span><br />
-    <b>cp4</b> <span class="label">N.º do código postal</span><br />
-    <b>cp3</b> <span class="label">Extensão do n.º do código postal</span><br />
-    <b>cpalf</b> <span class="label">Designação Postal</span>
-</p>
 <h2>3. Random ZipCode</h2>
 <p>If you need data from a random zipcode:</p>
 <p><code>{{$host}}/api/v1/random</code></p>

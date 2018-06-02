@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
-    
+
     public function Index(Request $request, $cp3, $cp4)
     {
         $results = DB::table('ctt')
@@ -25,8 +25,6 @@ class IndexController extends Controller
                 ['ctt.cp3', '=', $cp3],
                  ])->get();
 
-        
-        
         $data = [];
         foreach($results as $result) {
             $data[] = $this->normalizeData($result);
@@ -34,8 +32,8 @@ class IndexController extends Controller
 
         return response()->json($data);
     }
-    
-    
+
+
     public function Random()
     {
         $id = DB::table('ctt')
@@ -55,7 +53,8 @@ class IndexController extends Controller
 
         return response()->json($this->normalizeData($result));
     }
-    
+
+
     protected function normalizeData($result)
     {
         $fullAddress = [];
@@ -80,7 +79,7 @@ class IndexController extends Controller
             }
             
             if(!empty(trim($result->porta))) {
-                $fullAddress[] = trim($result->porta);
+                $fullAddress[] = ', '.trim($result->porta);
             }
             
             return [
@@ -99,6 +98,5 @@ class IndexController extends Controller
                 'longitude' => $result->longitude,
             ];
     }
-    
-}
 
+}
