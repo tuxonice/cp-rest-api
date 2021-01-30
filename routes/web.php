@@ -13,7 +13,8 @@
 
 $router->get('/', 'IndexController@Index');
 
-$router->group(['prefix' => 'api/v1', 'namespace' => 'ApiV1', 'middleware' => 'throttle:45,1'], function () use ($router) {
+$router->group(['prefix' => 'api/v1', 'namespace' => 'ApiV1', 'middleware' => 'throttle:45,60'], 
+function () use ($router) {
     $router->get('/{cp4}/{cp3}', 'IndexController@Index');
     $router->get('/random', 'IndexController@Random');
 });
