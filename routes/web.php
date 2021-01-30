@@ -11,9 +11,9 @@
 |
 */
 
-$app->get('/', 'IndexController@Index');
+$router->get('/', 'IndexController@Index');
 
-$app->group(['prefix' => 'api/v1', 'namespace' => 'ApiV1', 'middleware' => 'throttle:45,1'], function () use ($app) {
-    $app->get('/{cp4}/{cp3}', 'IndexController@Index');
-    $app->get('/random', 'IndexController@Random');
+$router->group(['prefix' => 'api/v1', 'namespace' => 'ApiV1', 'middleware' => 'throttle:45,1'], function () use ($router) {
+    $router->get('/{cp4}/{cp3}', 'IndexController@Index');
+    $router->get('/random', 'IndexController@Random');
 });
