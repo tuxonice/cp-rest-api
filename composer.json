@@ -5,15 +5,15 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.1",
-        "laravel/lumen-framework": "^8.0",
+        "php": ">=8.0",
+        "laravel/lumen-framework": "^9.0",
         "vlucas/phpdotenv": "^5.2",
         "sunra/php-simple-html-dom-parser": "1.5.2",
         "guzzlehttp/guzzle":"6.2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
-        "phpunit/phpunit": "~5.0",
+        "phpunit/phpunit": "~9.0",
         "mockery/mockery": "~0.9"
     },
     "autoload": {
